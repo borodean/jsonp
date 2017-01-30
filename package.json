@@ -1,5 +1,6 @@
 {
   "name": "@borodean/jsonp",
+  "version": "1.0.0",
   "description": "The smallest possible JSONP implementation",
   "scripts": {
     "build": "rollup -co dist/jsonp.min.js",
