@@ -2,6 +2,9 @@
   "name": "@borodean/jsonp",
   "version": "1.0.0",
   "description": "The smallest possible JSONP implementation",
+  "license": "MIT",
+  "author": "Vadym Borodin <borodean@gmail.com> http://borodean.com",
+  "repository": "borodean/jsonp",
   "scripts": {
     "build": "rollup -co dist/jsonp.min.js",
     "lint": "xo --env=browser --space",
