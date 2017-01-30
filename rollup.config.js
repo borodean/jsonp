@@ -9,7 +9,8 @@ module.exports = {
     require('rollup-plugin-filesize')(),
     require('rollup-plugin-uglify')({
       compress: {
-        collapse_vars: true
+        collapse_vars: true,
+        unsafe: true
       },
       mangle: true
     })
