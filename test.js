@@ -3,17 +3,19 @@
 var test = require('tape');
 var jsonp = require('.');
 
-test('injects a script', function (t) {
+var opts = { timeout: 5000 };
+
+test('injects a script', opts, function (t) {
   jsonp('https://jsfiddle.net/echo/jsonp', t.end);
   t.ok(document.querySelector('script[src^="https://jsfiddle.net/echo/jsonp?callback=j"]'));
 });
 
-test('respects query parameters', function (t) {
+test('respects query parameters', opts, function (t) {
   jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', t.end);
   t.ok(document.querySelector('script[src^="https://jsfiddle.net/echo/jsonp?foo=bar&callback=j"]'));
 });
 
-test('handles simultaneous requests', function (t) {
+test('handles simultaneous requests', opts, function (t) {
   t.plan(2);
 
   jsonp('https://jsfiddle.net/echo/jsonp?foo=bar&delay=1', function (err, data) {
@@ -25,7 +27,7 @@ test('handles simultaneous requests', function (t) {
   });
 });
 
-test('retrieves data and cleans up', function (t) {
+test('retrieves data and cleans up', opts, function (t) {
   jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', function (err, data) {
     t.ifError(err);
     t.deepEqual(data, {foo: 'bar'});
@@ -36,7 +38,7 @@ test('retrieves data and cleans up', function (t) {
   });
 });
 
-test('fails and cleans up', function (t) {
+test('fails and cleans up', opts, function (t) {
   jsonp('https://httpbin.org/status/400', function (err, data) {
     t.ok(err instanceof Error);
     t.equal(data, undefined);
