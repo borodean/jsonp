@@ -4,7 +4,7 @@ module.exports = function (url, callback) {
   var id = 'j' + count++;
 
   var script = document.createElement('script');
-  script.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + id;
+  script.src = url + (~url.indexOf('?') ? '&' : '?') + 'callback=' + id; // eslint-disable-line no-implicit-coercion
 
   script.onerror = function () {
     cleanup();
