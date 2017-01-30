@@ -1,0 +1,6 @@
+*.log
+*.sublime-*
+.npmignore
+borodean-jsonp-*.tgz
+rollup.config.js
+test.js

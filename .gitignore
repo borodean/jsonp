@@ -1,0 +1,6 @@
+*.log
+*.sublime-*
+borodean-jsonp-*.tgz
+dist/jsonp.min.js
+dist/jsonp.min.js.map
+node_modules
