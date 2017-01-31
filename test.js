@@ -3,7 +3,7 @@
 var test = require('tape');
 var jsonp = require('.');
 
-var opts = { timeout: 5000 };
+var opts = {timeout: 5000};
 
 test('injects a script', opts, function (t) {
   jsonp('https://jsfiddle.net/echo/jsonp', t.end);
