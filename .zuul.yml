@@ -10,7 +10,5 @@ browsers:
     version: 8.1
   - name: microsoftedge
     version: 13
-  - name: opera
-    version: 11
   - name: safari
     version: 6
