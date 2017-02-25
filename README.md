@@ -14,6 +14,19 @@ jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', function (err, data) {
 });
 ```
 
+When called this way, it creates an intermediate callback inside the `window` object and appends the passed URL with an additional `callback` query parameter containing its key.
+
+If you want more control over this, use the following 4-arguments form.
+
+## jsonp(object, key, url, callback)
+
+- `object` &lt;Object&gt; An object which would hold the intermediate callback function
+- `key` &lt;String&gt; The key of an object to which to assign the intermediate callback function
+- `url` &lt;String&gt; The URL to which the request is sent.
+- `callback` &lt;Function(err, data)&gt; An callback function that receives the data.
+
+When called this way, it creates an intermediate callback inside the passed object under the passed key. The passed URL is kept intact.
+
 ## Installation
 
 ```
