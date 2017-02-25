@@ -1,7 +1,7 @@
 /* eslint-disable handle-callback-err */
 
 var test = require('tape');
-var jsonp = require('.');
+var jsonp = require('..');
 
 var opts = {timeout: 5000};
 
