@@ -1,15 +1,13 @@
 var count = 0;
 
-module.exports = function (object, key, url, callback) {
-  if (arguments.length < 4) {
-    callback = key;
-    key = 'j' + count++;
-    url = object + (~object.indexOf('?') ? '&' : '?') + 'callback=' + key; // eslint-disable-line no-implicit-coercion
-    object = window;
-  }
+module.exports = function (options, callback) {
+  var url = options.url || options;
+  var object = options.object || window;
+  var key = options.key || 'j' + count++;
+  var parameter = (options.parameter === undefined) ? 'callback' : options.parameter;
 
   var script = document.createElement('script');
-  script.src = url;
+  script.src = parameter ? (url + (~url.indexOf('?') ? '&' : '?') + parameter + '=' + key) : url; // eslint-disable-line no-implicit-coercion
 
   script.onerror = function () {
     delete object[key];

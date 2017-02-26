@@ -8,14 +8,15 @@
   "scripts": {
     "build": "rollup -co dist/jsonp.min.js",
     "lint": "xo --env=browser --space",
-    "test": "zuul -- test/*",
-    "test-local": "zuul --local -- test/*"
+    "test": "zuul -- test.js",
+    "test-local": "zuul --local -- test.js"
   },
   "devDependencies": {
     "rollup": "^0.41.4",
     "rollup-plugin-commonjs": "^7.0.0",
     "rollup-plugin-filesize": "^1.0.1",
     "rollup-plugin-uglify": "^1.0.1",
+    "sinon": "^1.17.7",
     "tape": "^4.6.3",
     "xo": "^0.17.1",
     "zuul": "^3.11.1"

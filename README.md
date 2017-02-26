@@ -1,11 +1,17 @@
 [![Sauce test status][sauce-matrix]][sauce]
 
-# jsonp(url, callback)
+# jsonp(options, callback)
 
-- `url` &lt;String&gt; The URL to which the request is sent.
+- `options` &lt;Object&gt;|&lt;String&gt;
+  - `url` &lt;String&gt; The URL to which the request is sent.
+  - `parameter` &lt;String&gt;|false The name of the JSONP query parameter. Defaults to `"callback"`.
+  - `object` &lt;Object&gt; An object to which to attach the JSONP callback. Defaults to `window`.
+  - `key` &lt;String&gt; The name of the JSONP callback. Defaults to an automatically generated unique value.
 - `callback` &lt;Function(err, data)&gt; A callback function that receives the data.
 
-Loads data from the server using [JSONP][jsonp]. Example:
+Loads data from the server using [JSONP][jsonp].
+
+If `options` is a string, then it specifies the URL. Example:
 
 ```js
 jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', function (err, data) {
@@ -13,19 +19,6 @@ jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', function (err, data) {
   console.log(data);
 });
 ```
-
-When called this way, it creates an intermediate callback inside the `window` object and appends the passed URL with an additional `callback` query parameter containing its key.
-
-If you want more control over this, use the following 4-arguments form.
-
-## jsonp(object, key, url, callback)
-
-- `object` &lt;Object&gt; An object which would hold the intermediate callback function
-- `key` &lt;String&gt; The key of an object to which to assign the intermediate callback function
-- `url` &lt;String&gt; The URL to which the request is sent.
-- `callback` &lt;Function(err, data)&gt; An callback function that receives the data.
-
-When called this way, it creates an intermediate callback inside the passed object under the passed key. The passed URL is kept intact.
 
 ## Installation
 
