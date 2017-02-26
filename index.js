@@ -12,19 +12,14 @@ module.exports = function (object, key, url, callback) {
   script.src = url;
 
   script.onerror = function () {
-    cleanup();
+    delete object[key];
     callback(new Error());
   };
 
   object[key] = function (response) {
-    cleanup();
+    delete object[key];
     callback(null, response);
   };
 
-  function cleanup() {
-    document.head.removeChild(script);
-    delete object[key];
-  }
-
-  document.head.appendChild(script);
+  document.head.removeChild(document.head.appendChild(script));
 };
