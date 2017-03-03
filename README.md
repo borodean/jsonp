@@ -26,7 +26,7 @@ npm install @borodean/jsonp
 
 For a browser global version check the `dist` directory of the installed module or directly download it:
 
-- [Production version][dl] – 271 bytes, minified and gzipped
+- [Production version][dl] – 268 bytes, minified and gzipped
 - [Source map][dl-map]
 
 [dl]: https://github.com/borodean/jsonp/releases/download/2.0.0/jsonp-2.0.0.min.js
