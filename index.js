@@ -8,7 +8,7 @@ module.exports = function (url, options, callback) {
 
   var object = options.object || window;
   var key = options.key || 'j' + count++;
-  var parameter = (options.parameter === undefined) ? 'callback' : options.parameter;
+  var parameter = 'parameter' in options ? options.parameter : 'callback';
 
   var script = document.createElement('script');
   script.src = parameter ? (url + (~url.indexOf('?') ? '&' : '?') + parameter + '=' + key) : url; // eslint-disable-line no-implicit-coercion
