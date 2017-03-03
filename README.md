@@ -3,8 +3,8 @@
 # jsonp(url[, options], callback)
 
 - `url` &lt;String&gt; The URL to which the request is sent.
-- `options` &lt;Object&gt;|&lt;String&gt;
-  - `parameter` &lt;String&gt;|false The name of the JSONP query parameter. Defaults to `"callback"`.
+- `options` &lt;Object&gt;
+  - `parameter` &lt;String&gt; The name of the JSONP query parameter. Defaults to `"callback"`.
   - `object` &lt;Object&gt; An object to which to attach the JSONP callback. Defaults to `window`.
   - `key` &lt;String&gt; The name of the JSONP callback. Defaults to an automatically generated unique value.
 - `callback` &lt;Function(err, data)&gt; A callback function that receives the data.

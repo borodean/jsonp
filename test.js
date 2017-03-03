@@ -57,7 +57,7 @@ test('sets a custom callback query parameter', opts, function (t) {
 });
 
 test('disables the callback query parameter', opts, function (t) {
-  jsonp('https://httpbin.org/status/400', {parameter: false}, t.end.bind(this, null));
+  jsonp('https://httpbin.org/status/400', {parameter: ''}, t.end.bind(this, null));
   t.equal(appendChild.lastCall.args[0].src, 'https://httpbin.org/status/400');
 });
 
@@ -69,7 +69,7 @@ test('sets a custom callback name', opts, function (t) {
 
 test('sets a custom callback object', opts, function (t) {
   window.foo = {};
-  jsonp('https://jsfiddle.net/echo/jsonp?callback=foo.bar', {object: window.foo, key: 'bar', parameter: false}, function () {
+  jsonp('https://jsfiddle.net/echo/jsonp?callback=foo.bar', {object: window.foo, key: 'bar', parameter: ''}, function () {
     delete window.foo;
     t.end();
   });
