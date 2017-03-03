@@ -1,7 +1,11 @@
 var count = 0;
 
-module.exports = function (options, callback) {
-  var url = options.url || options;
+module.exports = function (url, options, callback) {
+  if (!callback) {
+    callback = options;
+    options = {};
+  }
+
   var object = options.object || window;
   var key = options.key || 'j' + count++;
   var parameter = (options.parameter === undefined) ? 'callback' : options.parameter;

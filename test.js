@@ -52,24 +52,24 @@ test('fails and cleans up', opts, function (t) {
 });
 
 test('sets a custom callback query parameter', opts, function (t) {
-  jsonp({url: 'https://www.reddit.com/api/info.json', parameter: 'jsonp'}, t.end);
+  jsonp('https://www.reddit.com/api/info.json', {parameter: 'jsonp'}, t.end);
   t.equal(appendChild.lastCall.args[0].src, 'https://www.reddit.com/api/info.json?jsonp=j6');
 });
 
 test('disables the callback query parameter', opts, function (t) {
-  jsonp({url: 'https://httpbin.org/status/400', parameter: false}, t.end.bind(this, null));
+  jsonp('https://httpbin.org/status/400', {parameter: false}, t.end.bind(this, null));
   t.equal(appendChild.lastCall.args[0].src, 'https://httpbin.org/status/400');
 });
 
 test('sets a custom callback name', opts, function (t) {
-  jsonp({url: 'https://jsfiddle.net/echo/jsonp', key: 'foo'}, t.end);
+  jsonp('https://jsfiddle.net/echo/jsonp', {key: 'foo'}, t.end);
   t.equal(typeof window.foo, 'function');
   t.equal(appendChild.lastCall.args[0].src, 'https://jsfiddle.net/echo/jsonp?callback=foo');
 });
 
 test('sets a custom callback object', opts, function (t) {
   window.foo = {};
-  jsonp({url: 'https://jsfiddle.net/echo/jsonp?callback=foo.bar', object: window.foo, key: 'bar', parameter: false}, function () {
+  jsonp('https://jsfiddle.net/echo/jsonp?callback=foo.bar', {object: window.foo, key: 'bar', parameter: false}, function () {
     delete window.foo;
     t.end();
   });
