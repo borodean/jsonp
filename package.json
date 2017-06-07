@@ -7,7 +7,7 @@
   "repository": "borodean/jsonp",
   "scripts": {
     "build": "rollup -c",
-    "lint": "xo --env=browser --space",
+    "lint": "xo --env=browser --no-esnext --space",
     "test": "zuul -- test.js",
     "test-local": "zuul --local -- test/*"
   },

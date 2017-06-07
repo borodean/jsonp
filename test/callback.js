@@ -1,7 +1,7 @@
 /* eslint-disable handle-callback-err */
 
 var sinon = require('sinon');
-var test = require('tape');
+var test = require('blue-tape');
 var jsonp = require('../index');
 
 var opts = {timeout: 5000};

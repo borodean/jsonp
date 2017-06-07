@@ -45,7 +45,7 @@ test('retrieves data and cleans up', opts, function (t) {
 
 test('fails and cleans up', opts, function (t) {
   var promise = jsonp('https://httpbin.org/status/400');
-  promise.catch(function (err) {
+  promise.catch(function () {
     t.notOk(Object.keys(window).some(RegExp.prototype.test.bind(/^j\d+/)));
     t.equal(document.querySelectorAll('script[src*="jsfiddle.net"]').length, 0);
   });
