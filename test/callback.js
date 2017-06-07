@@ -2,19 +2,23 @@
 
 var sinon = require('sinon');
 var test = require('tape');
-var jsonp = require('.');
+var jsonp = require('../index');
 
-var appendChild = sinon.spy(document.head, 'appendChild');
 var opts = {timeout: 5000};
+
+test('setup', function (t) {
+  sinon.spy(document.head, 'appendChild');
+  t.end();
+});
 
 test('injects a script', opts, function (t) {
   jsonp('https://jsfiddle.net/echo/jsonp', t.end);
-  t.equal(appendChild.lastCall.args[0].src, 'https://jsfiddle.net/echo/jsonp?callback=j0');
+  t.equal(document.head.appendChild.lastCall.args[0].src, 'https://jsfiddle.net/echo/jsonp?callback=j0');
 });
 
 test('respects query parameters', opts, function (t) {
   jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', t.end);
-  t.equal(appendChild.lastCall.args[0].src, 'https://jsfiddle.net/echo/jsonp?foo=bar&callback=j1');
+  t.equal(document.head.appendChild.lastCall.args[0].src, 'https://jsfiddle.net/echo/jsonp?foo=bar&callback=j1');
 });
 
 test('handles simultaneous requests', opts, function (t) {
@@ -53,18 +57,18 @@ test('fails and cleans up', opts, function (t) {
 
 test('sets a custom callback query parameter', opts, function (t) {
   jsonp('https://www.reddit.com/api/info.json', {parameter: 'jsonp'}, t.end);
-  t.equal(appendChild.lastCall.args[0].src, 'https://www.reddit.com/api/info.json?jsonp=j6');
+  t.equal(document.head.appendChild.lastCall.args[0].src, 'https://www.reddit.com/api/info.json?jsonp=j6');
 });
 
 test('disables the callback query parameter', opts, function (t) {
   jsonp('https://httpbin.org/status/400', {parameter: ''}, t.end.bind(this, null));
-  t.equal(appendChild.lastCall.args[0].src, 'https://httpbin.org/status/400');
+  t.equal(document.head.appendChild.lastCall.args[0].src, 'https://httpbin.org/status/400');
 });
 
 test('sets a custom callback name', opts, function (t) {
   jsonp('https://jsfiddle.net/echo/jsonp', {key: 'foo'}, t.end);
   t.equal(typeof window.foo, 'function');
-  t.equal(appendChild.lastCall.args[0].src, 'https://jsfiddle.net/echo/jsonp?callback=foo');
+  t.equal(document.head.appendChild.lastCall.args[0].src, 'https://jsfiddle.net/echo/jsonp?callback=foo');
 });
 
 test('sets a custom callback object', opts, function (t) {
@@ -74,4 +78,9 @@ test('sets a custom callback object', opts, function (t) {
     t.end();
   });
   t.equal(typeof window.foo.bar, 'function');
+});
+
+test('teardown', function (t) {
+  document.head.appendChild.restore();
+  t.end();
 });

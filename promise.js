@@ -1,10 +1,7 @@
 var count = 0;
 
-module.exports = function (url, options, callback) {
-  if (!callback) {
-    callback = options;
-    options = {};
-  }
+module.exports = function (url, options) {
+  options = options || {};
 
   var object = options.object || window;
   var key = options.key || 'j' + count++;
@@ -15,13 +12,15 @@ module.exports = function (url, options, callback) {
 
   document.head.removeChild(document.head.appendChild(script));
 
-  script.onerror = function () {
-    delete object[key];
-    callback(new Error());
-  };
+  return new Promise(function (resolve, reject) {
+    script.onerror = function () {
+      delete object[key];
+      reject(new Error());
+    };
 
-  object[key] = function (response) {
-    delete object[key];
-    callback(null, response);
-  };
+    object[key] = function (response) {
+      delete object[key];
+      resolve(response);
+    };
+  });
 };

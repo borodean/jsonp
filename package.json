@@ -6,19 +6,19 @@
   "author": "Vadym Borodin <borodean@gmail.com> http://borodean.com",
   "repository": "borodean/jsonp",
   "scripts": {
-    "build": "rollup -co dist/jsonp.min.js",
+    "build": "rollup -c",
     "lint": "xo --env=browser --space",
     "test": "zuul -- test.js",
-    "test-local": "zuul --local -- test.js"
+    "test-local": "zuul --local -- test/*"
   },
   "devDependencies": {
-    "rollup": "^0.41.4",
-    "rollup-plugin-commonjs": "^7.0.0",
+    "blue-tape": "^1.0.0",
+    "rollup": "^0.42.0",
+    "rollup-plugin-commonjs": "^8.0.2",
     "rollup-plugin-filesize": "^1.0.1",
-    "rollup-plugin-uglify": "^1.0.1",
-    "sinon": "^1.17.7",
-    "tape": "^4.6.3",
-    "xo": "^0.17.1",
+    "rollup-plugin-uglify": "^2.0.1",
+    "sinon": "^2.3.2",
+    "xo": "^0.18.2",
     "zuul": "^3.11.1"
   }
 }
