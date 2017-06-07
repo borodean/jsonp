@@ -8,7 +8,7 @@
   "scripts": {
     "build": "rollup -c",
     "lint": "xo --env=browser --no-esnext --space",
-    "test": "zuul -- test.js",
+    "test": "zuul -- test/*",
     "test-local": "zuul --local -- test/*"
   },
   "devDependencies": {
