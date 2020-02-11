@@ -41,7 +41,8 @@ module.exports = config => {
     preprocessors: {
       'test.js': ['browserify']
     },
-    reporters: ['dots']
+    reporters: ['dots'],
+    singleRun: true
   });
 
   if (!config.local) {
