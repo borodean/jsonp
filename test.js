@@ -1,7 +1,5 @@
 /* eslint-disable handle-callback-err */
 
-var sinon = require('sinon');
-var test = require('tape');
 var jsonp = require('.');
 
 var appendChild = sinon.spy(document.head, 'appendChild');

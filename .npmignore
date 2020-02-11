@@ -2,7 +2,7 @@
 *.sublime-*
 .npmignore
 .travis.yml
-.zuul.yml
 borodean-jsonp-*.tgz
+karma.conf.js
 rollup.config.js
 test.js

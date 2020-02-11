@@ -7,18 +7,24 @@
   "repository": "borodean/jsonp",
   "scripts": {
     "build": "rollup -co dist/jsonp.min.js",
-    "lint": "xo --env=browser --space",
-    "test": "zuul -- test.js",
-    "test-local": "zuul --local -- test.js"
+    "lint": "xo --env=browser --globals=sinon --globals=test --space",
+    "test": "karma start",
+    "test-local": "karma start --local"
   },
   "devDependencies": {
+    "browserify": "^16.5.0",
+    "karma": "^4.4.1",
+    "karma-browserify": "^7.0.0",
+    "karma-sauce-launcher": "^2.0.2",
+    "karma-sinon": "^1.0.5",
+    "karma-tape": "0.0.1",
     "rollup": "^0.41.4",
     "rollup-plugin-commonjs": "^7.0.0",
     "rollup-plugin-filesize": "^1.0.1",
     "rollup-plugin-uglify": "^1.0.1",
     "sinon": "^1.17.7",
     "tape": "^4.6.3",
-    "xo": "^0.17.1",
-    "zuul": "^3.11.1"
+    "watchify": "^3.11.1",
+    "xo": "^0.17.1"
   }
 }
