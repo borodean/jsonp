@@ -47,6 +47,7 @@ module.exports = config => {
   if (!config.local) {
     config.set({
       browsers: Object.keys(customLaunchers),
+      concurrency: 1,
       customLaunchers,
       reporters: [...config.reporters, 'saucelabs']
     });
