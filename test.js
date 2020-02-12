@@ -8,8 +8,6 @@ var jsonp = require('.');
 var appendChild = sinon.spy(document.head, 'appendChild');
 
 describe('jsonp', function () {
-  this.timeout(5000);
-
   it('injects a script', function (done) {
     jsonp('https://jsfiddle.net/echo/jsonp', done);
     expect(appendChild.lastCall.args[0].src).to.equal('https://jsfiddle.net/echo/jsonp?callback=j0');
