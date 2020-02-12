@@ -15,7 +15,7 @@
     "browserify": "^16.5.0",
     "karma": "^4.4.1",
     "karma-browserify": "^7.0.0",
-    "karma-sauce-launcher": "^2.0.2",
+    "karma-sauce-launcher": "^1.2.0",
     "karma-sinon": "^1.0.5",
     "karma-tape": "0.0.1",
     "rollup": "^0.41.4",
