@@ -38,8 +38,11 @@ describe('jsonp', function () {
       expect(data).to.deep.equal({foo: 'bar'});
 
       expect(Object.keys(window).some(RegExp.prototype.test.bind(/^j\d+/))).to.be.false;
-      expect(document.querySelectorAll('script[src*="jsfiddle.net"]')).to.have.lengthOf(0);
-      done();
+
+      setTimeout(function () {
+        expect(document.querySelectorAll('script[src*="jsfiddle.net"]')).to.have.lengthOf(0);
+        done();
+      });
     });
   });
 
@@ -49,8 +52,11 @@ describe('jsonp', function () {
       expect(data).to.be.undefined;
 
       expect(Object.keys(window).some(RegExp.prototype.test.bind(/^j\d+/))).to.be.false;
-      expect(document.querySelectorAll('script[src*="jsfiddle.net"]')).to.have.lengthOf(0);
-      done();
+
+      setTimeout(function () {
+        expect(document.querySelectorAll('script[src*="jsfiddle.net"]')).to.have.lengthOf(0);
+        done();
+      });
     });
   });
 
