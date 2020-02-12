@@ -1,75 +1,83 @@
 /* eslint-disable handle-callback-err */
+/* eslint-disable no-unused-expressions */
+
+var _ = require('lodash');
 
 var jsonp = require('.');
 
 var appendChild = sinon.spy(document.head, 'appendChild');
-var opts = {timeout: 5000};
 
-test('injects a script', opts, function (t) {
-  jsonp('https://jsfiddle.net/echo/jsonp', t.end);
-  t.equal(appendChild.lastCall.args[0].src, 'https://jsfiddle.net/echo/jsonp?callback=j0');
-});
+describe('jsonp', function () {
+  this.timeout(5000);
 
-test('respects query parameters', opts, function (t) {
-  jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', t.end);
-  t.equal(appendChild.lastCall.args[0].src, 'https://jsfiddle.net/echo/jsonp?foo=bar&callback=j1');
-});
-
-test('handles simultaneous requests', opts, function (t) {
-  t.plan(2);
-
-  jsonp('https://jsfiddle.net/echo/jsonp?foo=bar&delay=1', function (err, data) {
-    t.deepEqual(data, {foo: 'bar'});
+  it('injects a script', function (done) {
+    jsonp('https://jsfiddle.net/echo/jsonp', done);
+    expect(appendChild.lastCall.args[0].src).to.equal('https://jsfiddle.net/echo/jsonp?callback=j0');
   });
 
-  jsonp('https://jsfiddle.net/echo/jsonp?baz=qux', function (err, data) {
-    t.deepEqual(data, {baz: 'qux'});
+  it('respects query parameters', function (done) {
+    jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', done);
+    expect(appendChild.lastCall.args[0].src).to.equal('https://jsfiddle.net/echo/jsonp?foo=bar&callback=j1');
   });
-});
 
-test('retrieves data and cleans up', opts, function (t) {
-  jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', function (err, data) {
-    t.ifError(err);
-    t.deepEqual(data, {foo: 'bar'});
+  it('handles simultaneous requests', function (done) {
+    done = _.after(2, done);
 
-    t.notOk(Object.keys(window).some(RegExp.prototype.test.bind(/^j\d+/)));
-    t.equal(document.querySelectorAll('script[src*="jsfiddle.net"]').length, 0);
-    t.end();
+    jsonp('https://jsfiddle.net/echo/jsonp?foo=bar&delay=1', function (err, data) {
+      expect(data).to.deep.equal({foo: 'bar'});
+      done();
+    });
+
+    jsonp('https://jsfiddle.net/echo/jsonp?baz=qux', function (err, data) {
+      expect(data).to.deep.equal({baz: 'qux'});
+      done();
+    });
   });
-});
 
-test('fails and cleans up', opts, function (t) {
-  jsonp('https://httpbin.org/status/400', function (err, data) {
-    t.ok(err instanceof Error);
-    t.equal(data, undefined);
+  it('retrieves data and cleans up', function (done) {
+    jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', function (err, data) {
+      expect(err).to.be.null;
+      expect(data).to.deep.equal({foo: 'bar'});
 
-    t.notOk(Object.keys(window).some(RegExp.prototype.test.bind(/^j\d+/)));
-    t.equal(document.querySelectorAll('script[src*="jsfiddle.net"]').length, 0);
-    t.end();
+      expect(Object.keys(window).some(RegExp.prototype.test.bind(/^j\d+/))).to.be.false;
+      expect(document.querySelectorAll('script[src*="jsfiddle.net"]')).to.have.lengthOf(0);
+      done();
+    });
   });
-});
 
-test('sets a custom callback query parameter', opts, function (t) {
-  jsonp('https://www.reddit.com/api/info.json', {parameter: 'jsonp'}, t.end);
-  t.equal(appendChild.lastCall.args[0].src, 'https://www.reddit.com/api/info.json?jsonp=j6');
-});
+  it('fails and cleans up', function (done) {
+    jsonp('https://httpbin.org/status/400', function (err, data) {
+      expect(err).to.be.an('error');
+      expect(data).to.be.undefined;
 
-test('disables the callback query parameter', opts, function (t) {
-  jsonp('https://httpbin.org/status/400', {parameter: ''}, t.end.bind(this, null));
-  t.equal(appendChild.lastCall.args[0].src, 'https://httpbin.org/status/400');
-});
-
-test('sets a custom callback name', opts, function (t) {
-  jsonp('https://jsfiddle.net/echo/jsonp', {key: 'foo'}, t.end);
-  t.equal(typeof window.foo, 'function');
-  t.equal(appendChild.lastCall.args[0].src, 'https://jsfiddle.net/echo/jsonp?callback=foo');
-});
-
-test('sets a custom callback object', opts, function (t) {
-  window.foo = {};
-  jsonp('https://jsfiddle.net/echo/jsonp?callback=foo.bar', {object: window.foo, key: 'bar', parameter: ''}, function () {
-    delete window.foo;
-    t.end();
+      expect(Object.keys(window).some(RegExp.prototype.test.bind(/^j\d+/))).to.be.false;
+      expect(document.querySelectorAll('script[src*="jsfiddle.net"]')).to.have.lengthOf(0);
+      done();
+    });
   });
-  t.equal(typeof window.foo.bar, 'function');
+
+  it('sets a custom callback query parameter', function (done) {
+    jsonp('https://www.reddit.com/api/info.json', {parameter: 'jsonp'}, done);
+    expect(appendChild.lastCall.args[0].src).to.equal('https://www.reddit.com/api/info.json?jsonp=j6');
+  });
+
+  it('disables the callback query parameter', function (done) {
+    jsonp('https://httpbin.org/status/400', {parameter: ''}, done.bind(this, null));
+    expect(appendChild.lastCall.args[0].src).to.equal('https://httpbin.org/status/400');
+  });
+
+  it('sets a custom callback name', function (done) {
+    jsonp('https://jsfiddle.net/echo/jsonp', {key: 'foo'}, done);
+    expect(window.foo).to.be.a('function');
+    expect(appendChild.lastCall.args[0].src).to.equal('https://jsfiddle.net/echo/jsonp?callback=foo');
+  });
+
+  it('sets a custom callback object', function (done) {
+    window.foo = {};
+    jsonp('https://jsfiddle.net/echo/jsonp?callback=foo.bar', {object: window.foo, key: 'bar', parameter: ''}, function () {
+      delete window.foo;
+      done();
+    });
+    expect(window.foo.bar).to.be.a('function');
+  });
 });
