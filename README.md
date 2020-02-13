@@ -1,4 +1,4 @@
-[![Build Status][travis-badge]][travis] [![Coverage][coveralls-badge]][coveralls] [![Sauce test status][sauce-badge]][sauce]
+[![npm version][npm-badge]][npm] [![Build Status][travis-badge]][travis] [![Coverage][coveralls-badge]][coveralls] [![Sauce test status][sauce-badge]][sauce]
 
 # jsonp(url[, options], callback)
 
@@ -56,6 +56,8 @@ Promise version:
 [dl-promise]:      https://github.com/borodean/jsonp/releases/download/3.0.0/jsonp-promise-3.0.0.min.js
 [dl-promise-map]:  https://github.com/borodean/jsonp/releases/download/3.0.0/jsonp-promise-3.0.0.min.js.map
 [jsonp]:           http://bob.ippoli.to/archives/2005/12/05/remote-json-jsonp/
+[npm]:             https://www.npmjs.com/package/@borodean/jsonp
+[npm-badge]:       https://img.shields.io/npm/v/@borodean/jsonp
 [sauce]:           https://saucelabs.com/u/borodean-jsonp
 [sauce-badge]:     https://badges.herokuapp.com/sauce/borodean-jsonp
 [travis]:          https://travis-ci.org/borodean/jsonp
