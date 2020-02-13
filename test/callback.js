@@ -1,86 +1,95 @@
 /* eslint-disable handle-callback-err */
+/* eslint-disable no-unused-expressions */
 
-var sinon = require('sinon');
-var test = require('blue-tape');
+var _ = require('lodash');
+
 var jsonp = require('../index');
 
-var opts = {timeout: 5000};
+describe('jsonp', function () {
+  this.timeout(20000);
 
-test('setup', function (t) {
-  sinon.spy(document.head, 'appendChild');
-  t.end();
-});
-
-test('injects a script', opts, function (t) {
-  jsonp('https://jsfiddle.net/echo/jsonp', t.end);
-  t.equal(document.head.appendChild.lastCall.args[0].src, 'https://jsfiddle.net/echo/jsonp?callback=j0');
-});
-
-test('respects query parameters', opts, function (t) {
-  jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', t.end);
-  t.equal(document.head.appendChild.lastCall.args[0].src, 'https://jsfiddle.net/echo/jsonp?foo=bar&callback=j1');
-});
-
-test('handles simultaneous requests', opts, function (t) {
-  t.plan(2);
-
-  jsonp('https://jsfiddle.net/echo/jsonp?foo=bar&delay=1', function (err, data) {
-    t.deepEqual(data, {foo: 'bar'});
+  beforeEach(function () {
+    sinon.spy(document.head, 'appendChild');
   });
 
-  jsonp('https://jsfiddle.net/echo/jsonp?baz=qux', function (err, data) {
-    t.deepEqual(data, {baz: 'qux'});
+  afterEach(function () {
+    document.head.appendChild.restore();
   });
-});
 
-test('retrieves data and cleans up', opts, function (t) {
-  jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', function (err, data) {
-    t.ifError(err);
-    t.deepEqual(data, {foo: 'bar'});
-
-    t.notOk(Object.keys(window).some(RegExp.prototype.test.bind(/^j\d+/)));
-    t.equal(document.querySelectorAll('script[src*="jsfiddle.net"]').length, 0);
-    t.end();
+  it('injects a script', function (done) {
+    jsonp('https://jsfiddle.net/echo/jsonp', done);
+    expect(document.head.appendChild.lastCall.args[0].src).to.equal('https://jsfiddle.net/echo/jsonp?callback=j0');
   });
-});
 
-test('fails and cleans up', opts, function (t) {
-  jsonp('https://httpbin.org/status/400', function (err, data) {
-    t.ok(err instanceof Error);
-    t.equal(data, undefined);
-
-    t.notOk(Object.keys(window).some(RegExp.prototype.test.bind(/^j\d+/)));
-    t.equal(document.querySelectorAll('script[src*="jsfiddle.net"]').length, 0);
-    t.end();
+  it('respects query parameters', function (done) {
+    jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', done);
+    expect(document.head.appendChild.lastCall.args[0].src).to.equal('https://jsfiddle.net/echo/jsonp?foo=bar&callback=j1');
   });
-});
 
-test('sets a custom callback query parameter', opts, function (t) {
-  jsonp('https://www.reddit.com/api/info.json', {parameter: 'jsonp'}, t.end);
-  t.equal(document.head.appendChild.lastCall.args[0].src, 'https://www.reddit.com/api/info.json?jsonp=j6');
-});
+  it('handles simultaneous requests', function (done) {
+    done = _.after(2, done);
 
-test('disables the callback query parameter', opts, function (t) {
-  jsonp('https://httpbin.org/status/400', {parameter: ''}, t.end.bind(this, null));
-  t.equal(document.head.appendChild.lastCall.args[0].src, 'https://httpbin.org/status/400');
-});
+    jsonp('https://jsfiddle.net/echo/jsonp?foo=bar&delay=1', function (err, data) {
+      expect(data).to.deep.equal({foo: 'bar'});
+      done();
+    });
 
-test('sets a custom callback name', opts, function (t) {
-  jsonp('https://jsfiddle.net/echo/jsonp', {key: 'foo'}, t.end);
-  t.equal(typeof window.foo, 'function');
-  t.equal(document.head.appendChild.lastCall.args[0].src, 'https://jsfiddle.net/echo/jsonp?callback=foo');
-});
-
-test('sets a custom callback object', opts, function (t) {
-  window.foo = {};
-  jsonp('https://jsfiddle.net/echo/jsonp?callback=foo.bar', {object: window.foo, key: 'bar', parameter: ''}, function () {
-    delete window.foo;
-    t.end();
+    jsonp('https://jsfiddle.net/echo/jsonp?baz=qux', function (err, data) {
+      expect(data).to.deep.equal({baz: 'qux'});
+      done();
+    });
   });
-  t.equal(typeof window.foo.bar, 'function');
-});
 
-test('teardown', function (t) {
-  document.head.appendChild.restore();
-  t.end();
+  it('retrieves data and cleans up', function (done) {
+    jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', function (err, data) {
+      expect(err).to.be.null;
+      expect(data).to.deep.equal({foo: 'bar'});
+
+      expect(Object.keys(window).some(RegExp.prototype.test.bind(/^j\d+/))).to.be.false;
+
+      setTimeout(function () {
+        expect(document.querySelectorAll('script[src*="jsfiddle.net"]')).to.have.lengthOf(0);
+        done();
+      });
+    });
+  });
+
+  it('fails and cleans up', function (done) {
+    jsonp('https://httpbin.org/status/400', function (err, data) {
+      expect(err).to.be.an('error');
+      expect(data).to.be.undefined;
+
+      expect(Object.keys(window).some(RegExp.prototype.test.bind(/^j\d+/))).to.be.false;
+
+      setTimeout(function () {
+        expect(document.querySelectorAll('script[src*="jsfiddle.net"]')).to.have.lengthOf(0);
+        done();
+      });
+    });
+  });
+
+  it('sets a custom callback query parameter', function (done) {
+    jsonp('https://www.reddit.com/api/info.json', {parameter: 'jsonp'}, done);
+    expect(document.head.appendChild.lastCall.args[0].src).to.equal('https://www.reddit.com/api/info.json?jsonp=j6');
+  });
+
+  it('disables the callback query parameter', function (done) {
+    jsonp('https://httpbin.org/status/400', {parameter: ''}, done.bind(this, null));
+    expect(document.head.appendChild.lastCall.args[0].src).to.equal('https://httpbin.org/status/400');
+  });
+
+  it('sets a custom callback name', function (done) {
+    jsonp('https://jsfiddle.net/echo/jsonp', {key: 'foo'}, done);
+    expect(window.foo).to.be.a('function');
+    expect(document.head.appendChild.lastCall.args[0].src).to.equal('https://jsfiddle.net/echo/jsonp?callback=foo');
+  });
+
+  it('sets a custom callback object', function (done) {
+    window.foo = {};
+    jsonp('https://jsfiddle.net/echo/jsonp?callback=foo.bar', {object: window.foo, key: 'bar', parameter: ''}, function () {
+      delete window.foo;
+      done();
+    });
+    expect(window.foo.bar).to.be.a('function');
+  });
 });
