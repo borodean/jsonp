@@ -12,10 +12,25 @@
 Loads data from the server using [JSONP][jsonp]. Example:
 
 ```js
-jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', function (err, data) {
+import jsonp from '@borodean/jsonp';
+
+jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', (err, data) => {
   if (err) throw err;
   console.log(data);
 });
+```
+
+# Promise version
+
+A version that returns a promise is also available:
+
+```js
+import jsonp from '@borodean/jsonp/promise';
+
+jsonp('https://jsfiddle.net/echo/jsonp?foo=bar').then(
+  data => console.log(data),
+  err => console.log(err)
+);
 ```
 
 ## Installation
@@ -26,11 +41,18 @@ npm install @borodean/jsonp
 
 For a browser global version check the `dist` directory of the installed module or directly download it:
 
-- [Production version][dl] – 268 bytes, minified and gzipped
-- [Source map][dl-map]
+- [Production version][dl-callback] – 266 bytes, minified and gzipped
+- [Source map][dl-callback-map]
 
-[dl]: https://github.com/borodean/jsonp/releases/download/2.0.0/jsonp-2.0.0.min.js
-[dl-map]: https://github.com/borodean/jsonp/releases/download/2.0.0/jsonp-2.0.0.min.js.map
+Promise version:
+
+- [Production version][dl-promise] – 277 bytes, minified and gzipped
+- [Source map][dl-promise-map]
+
+[dl-callback]: https://github.com/borodean/jsonp/releases/download/3.0.0/jsonp-3.0.0.min.js
+[dl-callback-map]: https://github.com/borodean/jsonp/releases/download/3.0.0/jsonp-3.0.0.min.js.map
+[dl-promise]: https://github.com/borodean/jsonp/releases/download/3.0.0/jsonp-promise-3.0.0.min.js
+[dl-promise-map]: https://github.com/borodean/jsonp/releases/download/3.0.0/jsonp-promise-3.0.0.min.js.map
 [jsonp]: http://bob.ippoli.to/archives/2005/12/05/remote-json-jsonp/
 [sauce]: https://saucelabs.com/u/borodean-jsonp
 [sauce-matrix]: https://saucelabs.com/browser-matrix/borodean-jsonp.svg
