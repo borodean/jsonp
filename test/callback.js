@@ -3,7 +3,7 @@
 
 var _ = require('lodash');
 
-var jsonp = require('../index');
+var jsonp = require('..');
 
 describe('jsonp', function () {
   this.timeout(20000);

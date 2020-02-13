@@ -10,10 +10,10 @@ module.exports = function (url, options) {
   var script = document.createElement('script');
   script.src = parameter ? (url + (~url.indexOf('?') ? '&' : '?') + parameter + '=' + key) : url; // eslint-disable-line no-implicit-coercion
 
-  document.head.removeChild(document.head.appendChild(script));
+  document.head.removeChild(document.head.appendChild(script)); // eslint-disable-line unicorn/prefer-node-append
 
   return new Promise(function (resolve, reject) {
-    script.onerror = function () {
+    script.onerror = function () { // eslint-disable-line unicorn/prefer-add-event-listener
       delete object[key];
       reject(new Error());
     };

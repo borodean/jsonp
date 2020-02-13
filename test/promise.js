@@ -1,5 +1,5 @@
-/* eslint-disable handle-callback-err */
 /* eslint-disable no-unused-expressions */
+/* eslint-disable promise/prefer-await-to-then */
 
 var _ = require('lodash');
 
