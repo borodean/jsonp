@@ -1,6 +1,8 @@
+/* eslint-disable import/no-unassigned-import */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable promise/prefer-await-to-then */
 
+require('core-js/features/promise');
 var _ = require('lodash');
 
 var jsonp = require('../promise');

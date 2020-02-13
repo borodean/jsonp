@@ -37,8 +37,7 @@ module.exports = config => {
       debug: true
     },
     files: ['test/*'],
-    frameworks: ['browserify', 'chai', 'mocha', 'polyfill', 'sinon'],
-    polyfill: ['Promise'],
+    frameworks: ['browserify', 'chai', 'mocha', 'sinon'],
     preprocessors: {
       'test/*': ['browserify']
     },
