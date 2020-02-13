@@ -4,14 +4,11 @@ import commonjs from '@rollup/plugin-commonjs';
 import filesize from 'rollup-plugin-filesize';
 import {uglify} from 'rollup-plugin-uglify';
 
-export default [{
-  input: 'callback.js',
-  output: {
-    file: 'dist/jsonp.min.js',
-    format: 'iife',
-    name: 'jsonp',
-    sourcemap: true
-  },
+const name = 'jsonp';
+
+const createInput = (input, output) => ({
+  input,
+  output: createOutput(`dist/${output}`),
   plugins: [
     commonjs(),
     filesize(),
@@ -23,23 +20,16 @@ export default [{
       mangle: true
     })
   ]
-}, {
-  input: 'promise.js',
-  output: {
-    file: 'dist/jsonp-promise.min.js',
-    format: 'iife',
-    name: 'jsonp',
-    sourcemap: true
-  },
-  plugins: [
-    commonjs(),
-    filesize(),
-    uglify({
-      compress: {
-        collapse_vars: true,
-        unsafe: true
-      },
-      mangle: true
-    })
-  ]
-}];
+});
+
+const createOutput = file => ({
+  file,
+  format: 'iife',
+  name,
+  sourcemap: true
+});
+
+export default [
+  createInput('callback.js', `${name}.min.js`),
+  createInput('promise.js', `${name}-promise.min.js`)
+];
