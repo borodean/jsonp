@@ -13,8 +13,6 @@ module.exports = function (url, options, callback) {
   var script = document.createElement('script');
   script.src = parameter ? (url + (~url.indexOf('?') ? '&' : '?') + parameter + '=' + key) : url; // eslint-disable-line no-implicit-coercion
 
-  document.head.removeChild(document.head.appendChild(script)); // eslint-disable-line unicorn/prefer-node-append
-
   script.onerror = function () { // eslint-disable-line unicorn/prefer-add-event-listener
     delete object[key];
     callback(new Error());
@@ -24,4 +22,6 @@ module.exports = function (url, options, callback) {
     delete object[key];
     callback(null, response);
   };
+
+  document.head.removeChild(document.head.appendChild(script)); // eslint-disable-line unicorn/prefer-node-append
 };
