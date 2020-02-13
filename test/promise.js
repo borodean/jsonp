@@ -10,10 +10,12 @@ describe('jsonp/promise', function () {
 
   beforeEach(function () {
     sinon.spy(document.head, 'appendChild');
+    window.foo = {};
   });
 
   afterEach(function () {
     document.head.appendChild.restore();
+    delete window.foo;
   });
 
   it('injects a script', function () {
@@ -68,19 +70,18 @@ describe('jsonp/promise', function () {
     return promise.then(expect.fail, _.noop);
   });
 
-  it('sets a custom callback name', function () {
-    var promise = jsonp('https://jsfiddle.net/echo/jsonp', {key: 'foo'});
-    expect(window.foo).to.be.a('function');
-    expect(document.head.appendChild.lastCall.args[0].src).to.equal('https://jsfiddle.net/echo/jsonp?callback=foo');
-    return promise;
+  it('retrieves data via a custom callback name', function () {
+    var promise = jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', {key: 'foo'});
+    return promise.then(function (data) {
+      expect(data).to.deep.equal({foo: 'bar'});
+      expect(document.head.appendChild.lastCall.args[0].src).to.equal('https://jsfiddle.net/echo/jsonp?foo=bar&callback=foo');
+    });
   });
 
-  it('sets a custom callback object', function () {
-    window.foo = {};
-    var promise = jsonp('https://jsfiddle.net/echo/jsonp?callback=foo.bar', {object: window.foo, key: 'bar', parameter: ''});
-    expect(window.foo.bar).to.be.a('function');
-    return promise.then(function () {
-      delete window.foo;
+  it('retrieves data via a custom callback object', function () {
+    var promise = jsonp('https://jsfiddle.net/echo/jsonp?foo=bar&callback=foo.bar', {object: window.foo, key: 'bar', parameter: ''});
+    return promise.then(function (data) {
+      expect(data).to.deep.equal({foo: 'bar'});
     });
   });
 });
