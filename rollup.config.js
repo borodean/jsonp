@@ -4,11 +4,16 @@ import commonjs from '@rollup/plugin-commonjs';
 import filesize from 'rollup-plugin-filesize';
 import {uglify} from 'rollup-plugin-uglify';
 
+import {version} from './package.json';
+
 const name = 'jsonp';
 
-const createInput = (input, output) => ({
+const createInput = (input, outputBasename) => ({
   input,
-  output: createOutput(`dist/${output}`),
+  output: [
+    createOutput(`dist/${outputBasename}.min.js`),
+    createOutput(`dist/${outputBasename}-${version}.min.js`)
+  ],
   plugins: [
     commonjs(),
     filesize(),
@@ -30,6 +35,6 @@ const createOutput = file => ({
 });
 
 export default [
-  createInput('callback.js', `${name}.min.js`),
-  createInput('promise.js', `${name}-promise.min.js`)
+  createInput('callback.js', name),
+  createInput('promise.js', `${name}-promise`)
 ];
