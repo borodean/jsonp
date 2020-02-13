@@ -22,13 +22,13 @@ describe('jsonp/promise', function () {
 
   it('injects a script', function () {
     var promise = jsonp('https://jsfiddle.net/echo/jsonp');
-    expect(document.head.appendChild.lastCall.args[0].src).to.equal('https://jsfiddle.net/echo/jsonp?callback=j0');
+    expect(document.head.appendChild.lastCall.args[0].src).to.have.string('https://jsfiddle.net/echo/jsonp?callback=');
     return promise;
   });
 
   it('respects query parameters', function () {
     var promise = jsonp('https://jsfiddle.net/echo/jsonp?foo=bar');
-    expect(document.head.appendChild.lastCall.args[0].src).to.equal('https://jsfiddle.net/echo/jsonp?foo=bar&callback=j1');
+    expect(document.head.appendChild.lastCall.args[0].src).to.have.string('https://jsfiddle.net/echo/jsonp?foo=bar&callback=');
     return promise;
   });
 
@@ -62,7 +62,7 @@ describe('jsonp/promise', function () {
 
   it('sets a custom callback query parameter', function () {
     var promise = jsonp('https://www.reddit.com/api/info.json', {parameter: 'jsonp'});
-    expect(document.head.appendChild.lastCall.args[0].src).to.equal('https://www.reddit.com/api/info.json?jsonp=j6');
+    expect(document.head.appendChild.lastCall.args[0].src).to.have.string('https://www.reddit.com/api/info.json?jsonp=');
     return promise;
   });
 
