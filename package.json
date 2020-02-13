@@ -1,6 +1,6 @@
 {
   "name": "@borodean/jsonp",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "The smallest possible JSONP implementation",
   "license": "MIT",
   "author": "Vadym Borodin <borodean@gmail.com> http://borodean.com",

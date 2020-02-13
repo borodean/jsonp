@@ -51,10 +51,10 @@ Promise version:
 
 [coveralls]:       https://coveralls.io/github/borodean/jsonp
 [coveralls-badge]: https://img.shields.io/coveralls/borodean/jsonp/master
-[dl-callback]:     https://github.com/borodean/jsonp/releases/download/3.0.1/jsonp-3.0.1.min.js
-[dl-callback-map]: https://github.com/borodean/jsonp/releases/download/3.0.1/jsonp-3.0.1.min.js.map
-[dl-promise]:      https://github.com/borodean/jsonp/releases/download/3.0.1/jsonp-promise-3.0.1.min.js
-[dl-promise-map]:  https://github.com/borodean/jsonp/releases/download/3.0.1/jsonp-promise-3.0.1.min.js.map
+[dl-callback]:     https://github.com/borodean/jsonp/releases/download/3.0.2/jsonp-3.0.2.min.js
+[dl-callback-map]: https://github.com/borodean/jsonp/releases/download/3.0.2/jsonp-3.0.2.min.js.map
+[dl-promise]:      https://github.com/borodean/jsonp/releases/download/3.0.2/jsonp-promise-3.0.2.min.js
+[dl-promise-map]:  https://github.com/borodean/jsonp/releases/download/3.0.2/jsonp-promise-3.0.2.min.js.map
 [jsonp]:           http://bob.ippoli.to/archives/2005/12/05/remote-json-jsonp/
 [npm]:             https://www.npmjs.com/package/@borodean/jsonp
 [npm-badge]:       https://img.shields.io/npm/v/@borodean/jsonp
