@@ -20,7 +20,7 @@ jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', (err, data) => {
 });
 ```
 
-# Promise version
+## Promise version
 
 A version that returns a promise is also available:
 
