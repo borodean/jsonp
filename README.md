@@ -50,7 +50,7 @@ Promise version:
 - [Source map][dl-promise-map]
 
 [coveralls]:       https://coveralls.io/github/borodean/jsonp
-[coveralls-badge]: https://img.shields.io/coveralls/borodean/jsonp.svg
+[coveralls-badge]: https://img.shields.io/coveralls/borodean/jsonp/master
 [dl-callback]:     https://github.com/borodean/jsonp/releases/download/3.0.0/jsonp-3.0.0.min.js
 [dl-callback-map]: https://github.com/borodean/jsonp/releases/download/3.0.0/jsonp-3.0.0.min.js.map
 [dl-promise]:      https://github.com/borodean/jsonp/releases/download/3.0.0/jsonp-promise-3.0.0.min.js
@@ -61,4 +61,4 @@ Promise version:
 [sauce]:           https://saucelabs.com/u/borodean-jsonp
 [sauce-badge]:     https://badges.herokuapp.com/sauce/borodean-jsonp
 [travis]:          https://travis-ci.org/borodean/jsonp
-[travis-badge]:    https://img.shields.io/travis/borodean/jsonp.svg
+[travis-badge]:    https://img.shields.io/travis/borodean/jsonp/master
