@@ -1,3 +1,5 @@
+[![Build Status][travis-badge]][travis] [![Coverage][coveralls-badge]][coveralls]
+
 [![Sauce test status][sauce-matrix]][sauce]
 
 # jsonp(url[, options], callback)
@@ -49,6 +51,8 @@ Promise version:
 - [Production version][dl-promise] – 277 bytes, minified and gzipped
 - [Source map][dl-promise-map]
 
+[coveralls]:       https://coveralls.io/github/borodean/jsonp
+[coveralls-badge]: https://img.shields.io/coveralls/borodean/jsonp.svg
 [dl-callback]: https://github.com/borodean/jsonp/releases/download/3.0.0/jsonp-3.0.0.min.js
 [dl-callback-map]: https://github.com/borodean/jsonp/releases/download/3.0.0/jsonp-3.0.0.min.js.map
 [dl-promise]: https://github.com/borodean/jsonp/releases/download/3.0.0/jsonp-promise-3.0.0.min.js
@@ -56,3 +60,5 @@ Promise version:
 [jsonp]: http://bob.ippoli.to/archives/2005/12/05/remote-json-jsonp/
 [sauce]: https://saucelabs.com/u/borodean-jsonp
 [sauce-matrix]: https://saucelabs.com/browser-matrix/borodean-jsonp.svg
+[travis]:          https://travis-ci.org/borodean/jsonp
+[travis-badge]:    https://img.shields.io/travis/borodean/jsonp.svg

@@ -34,14 +34,18 @@ module.exports = config => {
 
   config.set({
     browserify: {
-      debug: true
+      debug: true,
+      transform: ['browserify-istanbul']
+    },
+    coverageReporter: {
+      reporters: [{type: 'lcov'}, {type: 'text'}]
     },
     files: ['test/*'],
     frameworks: ['browserify', 'chai', 'mocha', 'sinon'],
     preprocessors: {
       'test/*': ['browserify']
     },
-    reporters: ['dots'],
+    reporters: ['dots', 'coverage', 'coveralls'],
     singleRun: true
   });
 

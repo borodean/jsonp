@@ -1,6 +1,7 @@
 *.log
 *.sublime-*
 borodean-jsonp-*.tgz
+coverage
 dist/*.min.js
 dist/*.min.js.map
 node_modules

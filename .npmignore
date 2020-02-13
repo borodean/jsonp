@@ -3,6 +3,7 @@
 .npmignore
 .travis.yml
 borodean-jsonp-*.tgz
+coverage
 dist/*-*.*.*.min.*
 karma.conf.js
 rollup.config.js
