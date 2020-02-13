@@ -36,10 +36,10 @@ module.exports = config => {
     browserify: {
       debug: true
     },
-    files: ['test.js'],
+    files: ['test/*'],
     frameworks: ['browserify', 'chai', 'mocha', 'sinon'],
     preprocessors: {
-      'test.js': ['browserify']
+      'test/*': ['browserify']
     },
     reporters: ['dots'],
     singleRun: true

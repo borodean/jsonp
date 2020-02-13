@@ -1,19 +1,22 @@
 {
   "name": "@borodean/jsonp",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "The smallest possible JSONP implementation",
   "license": "MIT",
   "author": "Vadym Borodin <borodean@gmail.com> http://borodean.com",
+  "main": "callback.js",
   "repository": "borodean/jsonp",
   "scripts": {
-    "build": "rollup -co dist/jsonp.min.js",
-    "lint": "xo --env=browser --env=mocha --global expect --global sinon --space",
+    "build": "rollup -c",
+    "lint": "xo --env=browser --env=mocha --global expect --global sinon --no-esnext --space",
     "test": "karma start",
     "test-local": "karma start --local"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^11.0.2",
     "browserify": "^16.5.0",
     "chai": "*",
+    "core-js": "^3.6.4",
     "karma": "^4.4.1",
     "karma-browserify": "^7.0.0",
     "karma-chai": "^0.1.0",
@@ -22,12 +25,11 @@
     "karma-sinon": "^1.0.5",
     "lodash": "^4.17.15",
     "mocha": "^4.1.0",
-    "rollup": "^0.41.4",
-    "rollup-plugin-commonjs": "^7.0.0",
-    "rollup-plugin-filesize": "^1.0.1",
-    "rollup-plugin-uglify": "^1.0.1",
-    "sinon": "^1.17.7",
+    "rollup": "^1.31.0",
+    "rollup-plugin-filesize": "^6.2.1",
+    "rollup-plugin-uglify": "^6.0.4",
+    "sinon": "^7.5.0",
     "watchify": "^3.11.1",
-    "xo": "^0.17.1"
+    "xo": "^0.26.0"
   }
 }
