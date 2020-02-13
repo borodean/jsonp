@@ -49,7 +49,7 @@ describe('jsonp/promise', function () {
 
   it('fails and cleans up', function () {
     var promise = jsonp('https://httpbin.org/status/400');
-    promise.then(expect.fail, function (err) {
+    return promise.then(expect.fail, function (err) {
       expect(err).to.be.an('error');
       expect(Object.keys(window).some(RegExp.prototype.test.bind(/^j\d+/))).to.be.false;
       expect(document.querySelectorAll('script[src*="jsfiddle.net"]')).to.have.lengthOf(0);
