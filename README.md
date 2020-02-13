@@ -1,4 +1,4 @@
-[![npm version][npm-badge]][npm] [![Build Status][travis-badge]][travis] [![Coverage][coveralls-badge]][coveralls] [![Sauce test status][sauce-badge]][sauce]
+[![npm version][npm-badge]][npm] [![Build status][travis-badge]][travis] [![Coverage][coveralls-badge]][coveralls] [![Sauce test status][sauce-badge]][sauce]
 
 # jsonp(url[, options], callback)
 
