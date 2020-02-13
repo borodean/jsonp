@@ -5,7 +5,7 @@ import filesize from 'rollup-plugin-filesize';
 import {uglify} from 'rollup-plugin-uglify';
 
 export default [{
-  input: 'index.js',
+  input: 'callback.js',
   output: {
     file: 'dist/jsonp.min.js',
     format: 'iife',

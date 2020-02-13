@@ -4,6 +4,7 @@
   "description": "The smallest possible JSONP implementation",
   "license": "MIT",
   "author": "Vadym Borodin <borodean@gmail.com> http://borodean.com",
+  "main": "callback.js",
   "repository": "borodean/jsonp",
   "scripts": {
     "build": "rollup -c",

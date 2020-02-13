@@ -3,9 +3,9 @@
 
 var _ = require('lodash');
 
-var jsonp = require('..');
+var jsonp = require('../callback');
 
-describe('jsonp', function () {
+describe('jsonp/callback', function () {
   this.timeout(20000);
 
   beforeEach(function () {
