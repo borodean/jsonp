@@ -20,12 +20,12 @@ describe('jsonp/callback', function () {
 
   it('injects a script', function (done) {
     jsonp('https://jsfiddle.net/echo/jsonp', done);
-    expect(document.head.appendChild.lastCall.args[0].src).to.equal('https://jsfiddle.net/echo/jsonp?callback=j0');
+    expect(document.head.appendChild.lastCall.args[0].src).to.have.string('https://jsfiddle.net/echo/jsonp?callback=');
   });
 
   it('respects query parameters', function (done) {
     jsonp('https://jsfiddle.net/echo/jsonp?foo=bar', done);
-    expect(document.head.appendChild.lastCall.args[0].src).to.equal('https://jsfiddle.net/echo/jsonp?foo=bar&callback=j1');
+    expect(document.head.appendChild.lastCall.args[0].src).to.have.string('https://jsfiddle.net/echo/jsonp?foo=bar&callback=');
   });
 
   it('handles simultaneous requests', function (done) {
@@ -72,7 +72,7 @@ describe('jsonp/callback', function () {
 
   it('sets a custom callback query parameter', function (done) {
     jsonp('https://www.reddit.com/api/info.json', {parameter: 'jsonp'}, done);
-    expect(document.head.appendChild.lastCall.args[0].src).to.equal('https://www.reddit.com/api/info.json?jsonp=j6');
+    expect(document.head.appendChild.lastCall.args[0].src).to.have.string('https://www.reddit.com/api/info.json?jsonp=');
   });
 
   it('disables the callback query parameter', function (done) {

@@ -4,7 +4,7 @@ module.exports = function (url, options) {
   options = options || {};
 
   var object = options.object || window;
-  var key = options.key || 'j' + count++;
+  var key = options.key || 'b' + count++;
   var parameter = 'parameter' in options ? options.parameter : 'callback';
 
   var script = document.createElement('script');
