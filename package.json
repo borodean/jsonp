@@ -8,9 +8,9 @@
   "repository": "borodean/jsonp",
   "scripts": {
     "build": "rollup -c",
-    "lint": "xo --env=browser --env=mocha --global expect --global sinon --no-esnext --space",
+    "lint": "xo --env=browser --env=mocha --extension=mjs --global expect --global sinon --no-esnext --space",
     "test": "karma start",
-    "test-local": "web-test-runner \"test/**/*.js\" --node-resolve"
+    "test-local": "web-test-runner \"test/**/*.mjs\" --node-resolve"
   },
   "devDependencies": {
     "@esm-bundle/chai": "^4.3.4-fix.0",
