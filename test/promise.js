@@ -2,10 +2,10 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable promise/prefer-await-to-then */
 
-require('core-js/features/promise');
-var _ = require('lodash');
+import 'core-js/features/promise';
+import { noop } from 'lodash-es';
 
-var jsonp = require('../promise');
+import jsonp from '../promise';
 
 describe('jsonp/promise', function () {
   this.timeout(20000);
@@ -69,7 +69,7 @@ describe('jsonp/promise', function () {
   it('disables the callback query parameter', function () {
     var promise = jsonp('https://httpbin.org/status/400', {parameter: ''});
     expect(document.head.appendChild.lastCall.args[0].src).to.equal('https://httpbin.org/status/400');
-    return promise.then(expect.fail, _.noop);
+    return promise.then(expect.fail, noop);
   });
 
   it('retrieves data via a custom callback name', function () {

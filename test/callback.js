@@ -1,9 +1,9 @@
 /* eslint-disable handle-callback-err */
 /* eslint-disable no-unused-expressions */
 
-var _ = require('lodash');
+import { after } from 'lodash-es';
 
-var jsonp = require('../callback');
+import jsonp from '../callback';
 
 describe('jsonp/callback', function () {
   this.timeout(20000);
@@ -29,7 +29,7 @@ describe('jsonp/callback', function () {
   });
 
   it('handles simultaneous requests', function (done) {
-    done = _.after(2, done);
+    done = after(2, done);
 
     jsonp('https://jsfiddle.net/echo/jsonp?foo=bar&delay=1', function (err, data) {
       expect(data).to.deep.equal({foo: 'bar'});

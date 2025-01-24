@@ -1,6 +1,6 @@
 var count = 0;
 
-module.exports = function (url, options, callback) {
+export default function (url, options, callback) {
   if (!callback) {
     callback = options;
     options = {};

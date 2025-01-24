@@ -1,10 +1,10 @@
 /* eslint-disable handle-callback-err */
 /* eslint-disable promise/prefer-await-to-then */
 
-var _ = require('lodash');
+import { after } from 'lodash-es';
 
-var callback = require('../callback');
-var promise = require('../promise');
+import callback from '../callback';
+import promise from '../promise';
 
 describe('jsonp', function () {
   this.timeout(20000);
@@ -18,7 +18,7 @@ describe('jsonp', function () {
   });
 
   it('handles simultaneous requests from different versions', function (done) {
-    done = _.after(2, done);
+    done = after(2, done);
 
     callback('https://jsfiddle.net/echo/jsonp?foo=bar&delay=1', function (err, data) {
       expect(data).to.deep.equal({foo: 'bar'});
