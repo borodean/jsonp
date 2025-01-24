@@ -9,7 +9,7 @@
   "scripts": {
     "build": "rollup -c",
     "lint": "xo --env=browser --env=mocha --extension=mjs --global expect --global sinon --no-esnext --space",
-    "test": "karma start",
+    "test": "web-test-runner",
     "test-local": "web-test-runner"
   },
   "devDependencies": {
