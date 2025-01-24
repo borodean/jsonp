@@ -35,6 +35,6 @@ const createOutput = file => ({
 });
 
 export default [
-  createInput('callback.js', name),
-  createInput('promise.js', `${name}-promise`)
+  createInput('callback.mjs', name),
+  createInput('promise.mjs', `${name}-promise`)
 ];

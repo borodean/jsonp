@@ -1,6 +1,6 @@
 var count = 0;
 
-module.exports = function (url, options) {
+export default function (url, options) {
   options = options || {};
 
   var object = options.object || window;
