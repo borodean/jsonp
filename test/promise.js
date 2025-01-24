@@ -2,8 +2,9 @@
 /* eslint-disable no-unused-expressions */
 /* eslint-disable promise/prefer-await-to-then */
 
-import 'core-js/features/promise';
+import { expect } from '@esm-bundle/chai';
 import { noop } from 'lodash-es';
+import { spy } from 'sinon';
 
 import jsonp from '../promise';
 
@@ -11,7 +12,7 @@ describe('jsonp/promise', function () {
   this.timeout(20000);
 
   beforeEach(function () {
-    sinon.spy(document.head, 'appendChild');
+    spy(document.head, 'appendChild');
     window.foo = {};
   });
 
@@ -63,7 +64,7 @@ describe('jsonp/promise', function () {
   it('sets a custom callback query parameter', function () {
     var promise = jsonp('https://www.reddit.com/api/info.json', {parameter: 'jsonp'});
     expect(document.head.appendChild.lastCall.args[0].src).to.have.string('https://www.reddit.com/api/info.json?jsonp=');
-    return promise;
+    return promise.catch(noop);
   });
 
   it('disables the callback query parameter', function () {

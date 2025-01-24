@@ -10,14 +10,15 @@
     "build": "rollup -c",
     "lint": "xo --env=browser --env=mocha --global expect --global sinon --no-esnext --space",
     "test": "karma start",
-    "test-local": "karma start --local"
+    "test-local": "web-test-runner \"test/**/*.js\" --node-resolve"
   },
   "devDependencies": {
+    "@esm-bundle/chai": "^4.3.4-fix.0",
     "@rollup/plugin-commonjs": "^11.0.2",
+    "@web/test-runner": "^0.19.0",
     "browserify": "^16.5.0",
     "browserify-istanbul": "^3.0.1",
     "chai": "*",
-    "core-js": "^3.6.4",
     "karma": "^4.4.1",
     "karma-browserify": "^7.0.0",
     "karma-chai": "^0.1.0",

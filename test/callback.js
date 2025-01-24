@@ -1,7 +1,9 @@
 /* eslint-disable handle-callback-err */
 /* eslint-disable no-unused-expressions */
 
+import { expect } from '@esm-bundle/chai';
 import { after } from 'lodash-es';
+import { spy } from 'sinon';
 
 import jsonp from '../callback';
 
@@ -9,7 +11,7 @@ describe('jsonp/callback', function () {
   this.timeout(20000);
 
   beforeEach(function () {
-    sinon.spy(document.head, 'appendChild');
+    spy(document.head, 'appendChild');
     window.foo = {};
   });
 
@@ -71,7 +73,9 @@ describe('jsonp/callback', function () {
   });
 
   it('sets a custom callback query parameter', function (done) {
-    jsonp('https://www.reddit.com/api/info.json', {parameter: 'jsonp'}, done);
+    jsonp('https://www.reddit.com/api/info.json', {parameter: 'jsonp'}, function () {
+      done();
+    });
     expect(document.head.appendChild.lastCall.args[0].src).to.have.string('https://www.reddit.com/api/info.json?jsonp=');
   });
 

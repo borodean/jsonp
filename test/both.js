@@ -1,7 +1,9 @@
 /* eslint-disable handle-callback-err */
 /* eslint-disable promise/prefer-await-to-then */
 
+import { expect } from '@esm-bundle/chai';
 import { after } from 'lodash-es';
+import { spy } from 'sinon';
 
 import callback from '../callback';
 import promise from '../promise';
@@ -10,7 +12,7 @@ describe('jsonp', function () {
   this.timeout(20000);
 
   beforeEach(function () {
-    sinon.spy(document.head, 'appendChild');
+    spy(document.head, 'appendChild');
   });
 
   afterEach(function () {
